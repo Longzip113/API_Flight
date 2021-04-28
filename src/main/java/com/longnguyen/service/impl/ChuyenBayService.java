@@ -1,5 +1,7 @@
 package com.longnguyen.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +17,10 @@ import com.longnguyen.repository.ChuyenBayRepository;
 import com.longnguyen.repository.MayBayRepository;
 import com.longnguyen.repository.TuyenBayRepository;
 import com.longnguyen.service.IBasic;
+import com.longnguyen.service.IChuyenBayService;
 
 @Service
-public class ChuyenBayService implements IBasic<ChuyenBayDTO>{
+public class ChuyenBayService implements IChuyenBayService{
 	
 	@Autowired
 	ChuyenBayRepository chuyenBayRepository;
@@ -72,5 +75,23 @@ public class ChuyenBayService implements IBasic<ChuyenBayDTO>{
 	@Override
 	public ChuyenBayDTO findOne(Long id) {
 		return chuyenBayConverter.toDTO(chuyenBayRepository.getOne(id));
+	}
+
+	@Override
+	public List<ChuyenBayDTO> findAllByNgayGio(String ngayGio,Long id) {
+		List<ChuyenBayEntity> chucVuEntities = new ArrayList<ChuyenBayEntity>();
+		try {
+			chucVuEntities = chuyenBayRepository.findAllByNgayGioAndTuyenBayEntity(new SimpleDateFormat("yyyy-MM-dd").parse(ngayGio), id);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<ChuyenBayDTO> dtos = new ArrayList<ChuyenBayDTO>();
+		
+		for (ChuyenBayEntity item : chucVuEntities) {
+			ChuyenBayDTO dto = chuyenBayConverter.toDTO(item);
+			dtos.add(dto);
+		}
+		
+		return dtos;
 	}
 }

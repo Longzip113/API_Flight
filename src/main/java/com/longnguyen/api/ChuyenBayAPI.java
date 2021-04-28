@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.longnguyen.dto.ChuyenBayDTO;
-import com.longnguyen.service.IBasic;
+import com.longnguyen.service.IChuyenBayService;
 
 @RestController
 public class ChuyenBayAPI {
 	
 	@Autowired
-	IBasic<ChuyenBayDTO> service;
+	IChuyenBayService service;
 	
 	@GetMapping(value = "/chuyenbay")
 	public List<ChuyenBayDTO> getAll() {
@@ -43,6 +43,11 @@ public class ChuyenBayAPI {
 	@GetMapping(value = "/chuyenbay/{id}")
 	public ChuyenBayDTO getOne(@PathVariable("id")Long id) {
 		return service.findOne(id);
+	}
+	
+	@GetMapping(value = "/chuyenbays/{idtuyenbay}/{ngaygio}")
+	public List<ChuyenBayDTO> getOneByDate(@PathVariable("ngaygio")String ngayGio,@PathVariable("idtuyenbay")Long id) {
+		return service.findAllByNgayGio(ngayGio, id);
 	}
 	
 }

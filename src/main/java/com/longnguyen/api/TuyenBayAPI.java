@@ -21,27 +21,27 @@ public class TuyenBayAPI {
 	@Autowired
 	IBasic<TuyenBayDTO> service;
 	
-	@PostMapping(value = "/chucvu")
+	@PostMapping(value = "/tuyenbay")
 	public TuyenBayDTO save(@RequestBody TuyenBayDTO model) {
 		return service.save(model);
 	}
 	
-	@GetMapping(value = "/chucvu")
+	@GetMapping(value = "/tuyenbay")
 	public List<TuyenBayDTO> get() {
 		return service.findAll();
 	}
 	
-	@PutMapping(value = "/chucvu")
+	@PutMapping(value = "/tuyenbay")
 	public TuyenBayDTO update(@RequestBody TuyenBayDTO model) {
 		return service.update(model);
 	}
 	
-	@DeleteMapping(value = "/chucvu")
+	@DeleteMapping(value = "/tuyenbay")
 	public Boolean delete(@RequestBody Long[] ids) {
 		return service.delete(ids);
 	}
 	
-	@GetMapping(value = "/chucvu/{id}")
+	@GetMapping(value = "/tuyenbay/{id}")
 	public TuyenBayDTO getOne(@PathVariable("id")Long id) {
 		return service.findOne(id);
 	}
