@@ -10,10 +10,10 @@ import com.longnguyen.converter.KhachHangConverter;
 import com.longnguyen.dto.KhachHangDTO;
 import com.longnguyen.entity.KhachHangEntity;
 import com.longnguyen.repository.KhachHangRepository;
-import com.longnguyen.service.IBasic;
+import com.longnguyen.service.IKhachHangService;
 
 @Service
-public class KhachHangSerice implements IBasic<KhachHangDTO>{
+public class KhachHangSerice implements IKhachHangService{
 	
 	@Autowired
 	KhachHangConverter khachHangConverter;
@@ -52,8 +52,20 @@ public class KhachHangSerice implements IBasic<KhachHangDTO>{
 	}
 
 	@Override
-	public KhachHangDTO findOne(Long id) {
-		return khachHangConverter.toDTO(khachHangRepository.getOne(id));
+	public KhachHangDTO login(KhachHangDTO khachHangDTO) {
+		KhachHangEntity entity = khachHangRepository.findByUserNameAndPassWord(khachHangDTO.getMatKhau(), khachHangDTO.getTaiKhoan());
+		if (entity != null) {
+			return khachHangConverter.toDTO(entity);
+		}
+		return null;
 	}
+
+	@Override
+	public KhachHangDTO findOne(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 	
 }

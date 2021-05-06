@@ -16,7 +16,6 @@ import com.longnguyen.entity.TuyenBayEntity;
 import com.longnguyen.repository.ChuyenBayRepository;
 import com.longnguyen.repository.MayBayRepository;
 import com.longnguyen.repository.TuyenBayRepository;
-import com.longnguyen.service.IBasic;
 import com.longnguyen.service.IChuyenBayService;
 
 @Service
