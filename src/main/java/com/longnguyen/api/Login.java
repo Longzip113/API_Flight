@@ -1,6 +1,7 @@
 package com.longnguyen.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.longnguyen.dto.KhachHangDTO;
 import com.longnguyen.service.IKhachHangService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class Login {
 
@@ -16,6 +18,7 @@ public class Login {
 	
 	@PostMapping(value = "/login")
 	public KhachHangDTO login(@RequestBody KhachHangDTO model) {
+		
 		return service.login(model);
 	}
 }

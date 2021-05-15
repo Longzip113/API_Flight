@@ -12,7 +12,7 @@ import com.longnguyen.entity.ChuyenBayEntity;
 
 @Repository
 public interface ChuyenBayRepository extends JpaRepository<ChuyenBayEntity, Long>{
-	@Query(value = "select c.* from chuyenbay c where c.ngaygio <= :date and c.tuyenbay_id = :id", nativeQuery = true)
+	@Query(value = "select c.* from chuyenbay c where c.ngaygio >= :date and c.tuyenbay_id = :id", nativeQuery = true)
 	List<ChuyenBayEntity> findAllByNgayGioAndTuyenBayEntity(@Param("date")Date date, @Param("id")Long id);
 	
 }

@@ -3,6 +3,7 @@ package com.longnguyen.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.longnguyen.dto.ChuyenBayDTO;
 import com.longnguyen.service.IChuyenBayService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ChuyenBayAPI {
 	
@@ -40,14 +42,19 @@ public class ChuyenBayAPI {
 		return service.delete(ids);
 	}
 	
-	@GetMapping(value = "/chuyenbay/{id}")
-	public ChuyenBayDTO getOne(@PathVariable("id")Long id) {
-		return service.findOne(id);
+	@GetMapping(value = "/chuyenbay/{id}/{idVe}")
+	public ChuyenBayDTO getOne(@PathVariable("id")Long id, @PathVariable("idVe")Long idVe) {
+		return service.findOneChuyenBay(id, idVe);
 	}
 	
 	@GetMapping(value = "/chuyenbays/{idtuyenbay}/{ngaygio}")
 	public List<ChuyenBayDTO> getOneByDate(@PathVariable("ngaygio")String ngayGio,@PathVariable("idtuyenbay")Long id) {
 		return service.findAllByNgayGio(ngayGio, id);
+	}
+	
+	@PostMapping(value = "/search-chuyenbay")
+	public List<ChuyenBayDTO> searchChuyenBay(@RequestBody ChuyenBayDTO model) {
+		return service.findChuyenBay(model);
 	}
 	
 }

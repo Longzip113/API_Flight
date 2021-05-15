@@ -7,9 +7,25 @@ public class ChuyenBayDTO {
 	private Long id;
 	private Long tuyenBayId;
 	private Long mayBayId;
-	private Float thoiGianBay;
+	
 	private Date ngayGio;
+	private String ngay;
+	private String gio;
+	
+	private Float thoiGianBay;
 	private Boolean tinhTrang;
+	
+	
+	private Long sanBayDiID;
+	private Long sanBayDenID;
+	private String ngayDi;
+	private String ngayVe;
+	private String HangVe;
+	private String loaiVe;
+	private String codeSanDi;
+	private String codeSanDen;
+	private String donGia;
+	private Long idVe;
 	
 	
 	
@@ -60,5 +76,105 @@ public class ChuyenBayDTO {
 
 	public void setMayBayId(Long mayBayId) {
 		this.mayBayId = mayBayId;
-	}	
+	}
+
+	public Long getSanBayDiID() {
+		return sanBayDiID;
+	}
+
+	public void setSanBayDiID(Long sanBayDiID) {
+		this.sanBayDiID = sanBayDiID;
+	}
+
+	public Long getSanBayDenID() {
+		return sanBayDenID;
+	}
+
+	public void setSanBayDenID(Long sanBayDenID) {
+		this.sanBayDenID = sanBayDenID;
+	}
+
+
+	public String getNgayDi() {
+		return ngayDi;
+	}
+
+	public void setNgayDi(String ngayDi) {
+		this.ngayDi = ngayDi;
+	}
+
+	public String getNgayVe() {
+		return ngayVe;
+	}
+
+	public void setNgayVe(String ngayVe) {
+		this.ngayVe = ngayVe;
+	}
+
+	public String getCodeSanDi() {
+		return codeSanDi;
+	}
+
+	public void setCodeSanDi(String codeSanDi) {
+		this.codeSanDi = codeSanDi;
+	}
+
+	public String getCodeSanDen() {
+		return codeSanDen;
+	}
+
+	public void setCodeSanDen(String codeSanDen) {
+		this.codeSanDen = codeSanDen;
+	}
+
+	public String getHangVe() {
+		return HangVe;
+	}
+
+	public void setHangVe(String hangVe) {
+		HangVe = hangVe;
+	}
+
+	
+
+	public String getNgay() {
+		return ngay;
+	}
+
+	public void setNgay(String ngay) {
+		this.ngay = ngay;
+	}
+
+	public String getGio() {
+		return gio;
+	}
+
+	public void setGio(String gio) {
+		this.gio = gio;
+	}
+
+	public String getLoaiVe() {
+		return loaiVe;
+	}
+
+	public void setLoaiVe(String loaiVe) {
+		this.loaiVe = loaiVe;
+	}
+
+	public String getDonGia() {
+		return donGia;
+	}
+
+	public void setDonGia(String donGia) {
+		this.donGia = donGia;
+	}
+
+	public Long getIdVe() {
+		return idVe;
+	}
+
+	public void setIdVe(Long idVe) {
+		this.idVe = idVe;
+	}
+
 }
