@@ -52,13 +52,50 @@ public class ChuyenBayService implements IChuyenBayService{
 	
 	@Override
 	public List<ChuyenBayDTO> findAll() {
-		List<ChuyenBayEntity> chucVuEntities = chuyenBayRepository.findAll();
+		List<ChuyenBayEntity> chuyenBayEntities = chuyenBayRepository.findAll();
 		List<ChuyenBayDTO> dtos = new ArrayList<ChuyenBayDTO>();
 		
-		for (ChuyenBayEntity item : chucVuEntities) {
+		for (ChuyenBayEntity item : chuyenBayEntities) {
 			ChuyenBayDTO dto = chuyenBayConverter.toDTO(item);
 			dtos.add(dto);
 		}
+		List<TuyenBayEntity> tuyenBayEntities = tuyenBayRepository.findAll();
+		List<SanBayDTO> sanBayDTOs = sanBayService.findAll();
+		dtos.forEach(item -> {
+			MayBayEntity mayBayEntity = mayBayRepository.getOne(item.getMayBayId());
+			item.setHangVe(mayBayEntity.getHangMayBay());
+			
+			// Tách ngày giờ ra.
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = item.getNgayGio();
+			item.setNgay(dateFormat.format(date).toString());
+			
+			// gán id cho sân 
+			for (TuyenBayEntity tuyenBayEntity : tuyenBayEntities) {
+				if(item.getTuyenBayId() == tuyenBayEntity.getId())
+				{
+					item.setSanBayDenID(tuyenBayEntity.getSanBayDen().getId());
+					item.setSanBayDiID(tuyenBayEntity.getSanBaydi().getId());
+				}
+			}
+			
+			// gán code quốc tế cho chuyến bay.
+			for (SanBayDTO sanBayDTO : sanBayDTOs) {
+				if(item.getSanBayDenID() == sanBayDTO.getId())
+				{
+					item.setCodeSanDen("" + sanBayDTO.getCode());
+					item.setTenSanBayDen(sanBayDTO.getTenSanBay());
+					item.setThanhPhoDen(sanBayDTO.getTenThanhPho());
+				}
+				
+				if(item.getSanBayDiID() == sanBayDTO.getId())
+				{
+					item.setCodeSanDi("" + sanBayDTO.getCode());
+					item.setTenSanBayDi(sanBayDTO.getTenSanBay());
+					item.setThanhPhoDi(sanBayDTO.getTenThanhPho());
+				}
+			}
+		});
 		
 		return dtos;
 	}
@@ -68,6 +105,15 @@ public class ChuyenBayService implements IChuyenBayService{
 		TuyenBayEntity tuyenBayEntity = tuyenBayRepository.getOne(model.getTuyenBayId());
 		MayBayEntity mayBayEntity = mayBayRepository.getOne(model.getMayBayId());
 		ChuyenBayEntity entity = chuyenBayConverter.toEntity(model, mayBayEntity, tuyenBayEntity);
+		entity.setGhePhoThong(mayBayEntity.getSoGheHang1());
+		entity.setGheThuongGia(mayBayEntity.getSoGheHang2());
+		Date a;
+		try {
+			 a = new SimpleDateFormat("yyyy-MM-dd").parse(model.getNgay());
+			 entity.setNgayGio(a);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return chuyenBayConverter.toDTO(chuyenBayRepository.save(entity));
 	}
 
@@ -76,14 +122,21 @@ public class ChuyenBayService implements IChuyenBayService{
 		TuyenBayEntity tuyenBayEntity = tuyenBayRepository.getOne(model.getTuyenBayId());
 		MayBayEntity mayBayEntity = mayBayRepository.getOne(model.getMayBayId());
 		ChuyenBayEntity entity = chuyenBayConverter.toEntity(model, mayBayEntity, tuyenBayEntity);
+		entity.setGhePhoThong(mayBayEntity.getSoGheHang1());
+		entity.setGheThuongGia(mayBayEntity.getSoGheHang2());
+		Date a;
+		try {
+			 a = new SimpleDateFormat("yyyy-MM-dd").parse(model.getNgay());
+			 entity.setNgayGio(a);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return chuyenBayConverter.toDTO(chuyenBayRepository.save(entity));
 	}
 
 	@Override
-	public Boolean delete(Long[] ids) {
-		for (Long id : ids) {
-			chuyenBayRepository.delete(id);
-		}
+	public Boolean delete(Long id) {
+		chuyenBayRepository.delete(id);
 		return true;
 	}
 
@@ -102,10 +155,6 @@ public class ChuyenBayService implements IChuyenBayService{
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = model.getNgayGio();
 			model.setNgay(dateFormat.format(date).toString());
-			
-			DateFormat dateFormat1 = new SimpleDateFormat("HH.mm");
-			Date date1 = model.getNgayGio();
-			model.setGio(dateFormat1.format(date1).toString());
 			
 			model.setCodeSanDi("" + sanBayDTODi.getCode());
 			model.setCodeSanDen("" + sanBayDTODen.getCode());
@@ -144,30 +193,39 @@ public class ChuyenBayService implements IChuyenBayService{
 			MayBayEntity mayBayEntity = mayBayRepository.getOne(item.getMayBayId());
 			item.setHangVe(mayBayEntity.getHangMayBay());
 			
-			
+			// Tách ngày giờ ra.
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = item.getNgayGio();
 			item.setNgay(dateFormat.format(date).toString());
+	
+			// gán code quốc tế cho chuyến bay.
+			item.setCodeSanDi("" + sanBayDTODi.getCode());
+			item.setCodeSanDen("" + sanBayDTODen.getCode());
 			
-			DateFormat dateFormat1 = new SimpleDateFormat("HH.mm");
-			Date date1 = item.getNgayGio();
-			item.setGio(dateFormat1.format(date1).toString());
-			
-			
+			// gán giá vé cho chuyến bay và kiểm tra ghé còn hay không.
 			List<VeChuyenBayEntity> veChuyenBayEntities = veChuyenBayRepository.findByIDChuyenBay(item.getId());
 			veChuyenBayEntities.forEach(ve -> {
 				if(ve.getHangVeEntity().getId() == 1 && model.getLoaiVe().equals("PT")) {
-					item.setIdVe(ve.getId());
-					item.setDonGia(ve.getDonGia() + "");
+					if(item.getGhePhoThong() <= 0)
+					{
+						list.remove(item);
+					}
+					else {
+						item.setIdVe(ve.getId());
+						item.setDonGia(ve.getDonGia() + "");
+					}
 				}
 				if(ve.getHangVeEntity().getId() == 2 && model.getLoaiVe().equals("TG")) {
-					item.setIdVe(ve.getId());
-					item.setDonGia(ve.getDonGia() + "");
+					if(item.getGheThuongGia() <= 0)
+					{
+						list.remove(item);
+					}
+					else {
+						item.setIdVe(ve.getId());
+						item.setDonGia(ve.getDonGia() + "");
+					}
 				}
 			});
-			
-			item.setCodeSanDi("" + sanBayDTODi.getCode());
-			item.setCodeSanDen("" + sanBayDTODen.getCode());
 		});
 		
 		return list;
@@ -188,10 +246,6 @@ public class ChuyenBayService implements IChuyenBayService{
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = model.getNgayGio();
 			model.setNgay(dateFormat.format(date).toString());
-			
-			DateFormat dateFormat1 = new SimpleDateFormat("HH.mm");
-			Date date1 = model.getNgayGio();
-			model.setGio(dateFormat1.format(date1).toString());
 			
 			VeChuyenBayEntity veChuyenBayEntity = veChuyenBayRepository.getOne(idVe);
 			model.setIdVe(veChuyenBayEntity.getId());

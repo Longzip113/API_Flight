@@ -26,6 +26,23 @@ public class ChuyenBayEntity {
 	@Column(name = "thoigianbay")
 	private Float thoiGianBay;
 	
+	@Column(name = "ghephothong")
+	private Integer ghePhoThong;
+	
+	@Column(name = "ghethuonggia")
+	private Integer gheThuongGia;
+	
+	@Column(name = "gio")
+	private String gio;
+
+	public String getGio() {
+		return gio;
+	}
+
+	public void setGio(String gio) {
+		this.gio = gio;
+	}
+
 	@Column(name = "ngaygio")
 	private Date ngayGio;
 	
@@ -49,6 +66,22 @@ public class ChuyenBayEntity {
 
 	public void setVeChuyenBayEntities(List<VeChuyenBayEntity> veChuyenBayEntities) {
 		this.veChuyenBayEntities = veChuyenBayEntities;
+	}
+	
+	public Integer getGhePhoThong() {
+		return ghePhoThong;
+	}
+
+	public void setGhePhoThong(Integer ghePhoThong) {
+		this.ghePhoThong = ghePhoThong;
+	}
+
+	public Integer getGheThuongGia() {
+		return gheThuongGia;
+	}
+
+	public void setGheThuongGia(Integer gheThuongGia) {
+		this.gheThuongGia = gheThuongGia;
 	}
 
 	public Long getId() {

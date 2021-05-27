@@ -47,10 +47,8 @@ public class HangVeService implements IBasic<HangVeDTO>{
 	}
 
 	@Override
-	public Boolean delete(Long[] ids) {
-		for (Long id : ids) {
-			hangVeRepository.delete(id);
-		}
+	public Boolean delete(Long id) {
+		hangVeRepository.delete(id);
 		return true;
 	}
 

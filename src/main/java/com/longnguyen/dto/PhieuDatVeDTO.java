@@ -9,11 +9,18 @@ public class PhieuDatVeDTO {
 	private Long khachHangID;
 	private Long nhanVienID;
 	private String ghiChu;
-	private String maGhe;
-	private String codePhieuDatVe;
+	private String maVe;
+	private Integer roleDatVe;
 	private Date ngayDat;
 	private Double thanhTien;
 	private Boolean tinhTrang;
+	private Integer nguoiDatVe_id;
+	
+	
+	private String hoTen;
+	private String cmnd;
+	private String soDienThoai;
+	private String email;
 	
 
 	public Long getId() {
@@ -32,20 +39,12 @@ public class PhieuDatVeDTO {
 		this.ghiChu = ghiChu;
 	}
 
-	public String getMaGhe() {
-		return maGhe;
+	public String getMaVe() {
+		return maVe;
 	}
 
-	public void setMaGhe(String maGhe) {
-		this.maGhe = maGhe;
-	}
-
-	public String getCodePhieuDatVe() {
-		return codePhieuDatVe;
-	}
-
-	public void setCodePhieuDatVe(String codePhieuDatVe) {
-		this.codePhieuDatVe = codePhieuDatVe;
+	public void setMaVe(String maGhe) {
+		this.maVe = maGhe;
 	}
 
 	public Date getNgayDat() {
@@ -94,6 +93,54 @@ public class PhieuDatVeDTO {
 
 	public void setNhanVienID(Long nhanVienID) {
 		this.nhanVienID = nhanVienID;
+	}
+
+	public Integer getRoleDatVe() {
+		return roleDatVe;
+	}
+
+	public void setRoleDatVe(Integer roleDatVe) {
+		this.roleDatVe = roleDatVe;
+	}
+
+	public Integer getNguoiDatVe_id() {
+		return nguoiDatVe_id;
+	}
+
+	public void setNguoiDatVe_id(Integer nguoiDatVe_id) {
+		this.nguoiDatVe_id = nguoiDatVe_id;
+	}
+
+	public String getHoTen() {
+		return hoTen;
+	}
+
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
+	}
+
+	public String getCMND() {
+		return cmnd;
+	}
+
+	public void setCMND(String cMND) {
+		cmnd = cMND;
+	}
+
+	public String getSoDienThoai() {
+		return soDienThoai;
+	}
+
+	public void setSoDienThoai(String soDienThoai) {
+		this.soDienThoai = soDienThoai;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

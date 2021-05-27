@@ -6,6 +6,6 @@ public interface IBasic<T> {
 	List<T> findAll();
 	T save(T model);
 	T update(T model);
-	Boolean delete(Long[] ids);
+	Boolean delete(Long id);
 	T findOne(Long id);
 }

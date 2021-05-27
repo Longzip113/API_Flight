@@ -51,10 +51,8 @@ public class NhanVienService implements IBasic<NhanVienDTO>{
 	}
 
 	@Override
-	public Boolean delete(Long[] ids) {
-		for (Long id : ids) {
-			nhanVienRepository.delete(id);
-		}
+	public Boolean delete(Long id) {
+		nhanVienRepository.delete(id);
 		return true;
 	}
 

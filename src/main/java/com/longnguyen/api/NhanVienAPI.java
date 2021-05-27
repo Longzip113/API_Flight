@@ -35,9 +35,9 @@ public class NhanVienAPI {
 		return nhanVienService.update(model);
 	}
 	
-	@DeleteMapping(value = "/nhanvien")
-	public Boolean delete(@RequestBody Long[] ids) {
-		return nhanVienService.delete(ids);
+	@DeleteMapping(value = "/nhanvien/{id}")
+	public Boolean delete(@PathVariable("id") Long id) {
+		return nhanVienService.delete(id);
 	}
 	
 	@GetMapping(value = "/nhanvien/{id}")

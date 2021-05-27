@@ -49,10 +49,8 @@ public class SanBayService implements ISanBayService {
 	}
 
 	@Override
-	public Boolean delete(Long[] ids) {
-		for (Long id : ids) {
-			sanBayRepository.delete(id);
-		}
+	public Boolean delete(Long id) {
+		sanBayRepository.delete(id);
 		return true;
 	}
 

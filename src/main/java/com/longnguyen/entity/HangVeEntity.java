@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "hangve")
 public class HangVeEntity {
@@ -28,6 +30,7 @@ public class HangVeEntity {
 	@Column(name = "tinhtrang")
 	private Boolean tinhTrang;
 	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "hangVeEntity")
 	private List<VeChuyenBayEntity> veChuyenBayEntities = new ArrayList<>();
 	

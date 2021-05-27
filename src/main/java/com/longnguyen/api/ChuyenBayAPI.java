@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.longnguyen.dto.ChuyenBayDTO;
@@ -37,9 +38,9 @@ public class ChuyenBayAPI {
 		return service.update(model);
 	}
 	
-	@DeleteMapping(value = "/chuyenbay")
-	public Boolean delete(@RequestBody Long[] ids) {
-		return service.delete(ids);
+	@DeleteMapping(value = "/chuyenbay/{id}")
+	public Boolean delete(@PathVariable("id") Long id) {
+		return service.delete(id);
 	}
 	
 	@GetMapping(value = "/chuyenbay/{id}/{idVe}")
@@ -53,6 +54,7 @@ public class ChuyenBayAPI {
 	}
 	
 	@PostMapping(value = "/search-chuyenbay")
+	@ResponseBody
 	public List<ChuyenBayDTO> searchChuyenBay(@RequestBody ChuyenBayDTO model) {
 		return service.findChuyenBay(model);
 	}

@@ -7,6 +7,9 @@ public class ChuyenBayDTO {
 	private Long id;
 	private Long tuyenBayId;
 	private Long mayBayId;
+	private Integer ghePhoThong;
+	
+	private Integer gheThuongGia;
 	
 	private Date ngayGio;
 	private String ngay;
@@ -26,6 +29,10 @@ public class ChuyenBayDTO {
 	private String codeSanDen;
 	private String donGia;
 	private Long idVe;
+	private String tenSanBayDi;
+	private String tenSanBayDen;
+	private String thanhPhoDi;
+	private String thanhPhoDen;
 	
 	
 	
@@ -175,6 +182,54 @@ public class ChuyenBayDTO {
 
 	public void setIdVe(Long idVe) {
 		this.idVe = idVe;
+	}
+
+	public Integer getGhePhoThong() {
+		return ghePhoThong;
+	}
+
+	public void setGhePhoThong(Integer ghePhoThong) {
+		this.ghePhoThong = ghePhoThong;
+	}
+
+	public Integer getGheThuongGia() {
+		return gheThuongGia;
+	}
+
+	public void setGheThuongGia(Integer gheThuongGia) {
+		this.gheThuongGia = gheThuongGia;
+	}
+
+	public String getTenSanBayDi() {
+		return tenSanBayDi;
+	}
+
+	public void setTenSanBayDi(String tenSanBayDi) {
+		this.tenSanBayDi = tenSanBayDi;
+	}
+
+	public String getTenSanBayDen() {
+		return tenSanBayDen;
+	}
+
+	public void setTenSanBayDen(String tenSanBayDen) {
+		this.tenSanBayDen = tenSanBayDen;
+	}
+
+	public String getThanhPhoDi() {
+		return thanhPhoDi;
+	}
+
+	public void setThanhPhoDi(String thanhPhoDi) {
+		this.thanhPhoDi = thanhPhoDi;
+	}
+
+	public String getThanhPhoDen() {
+		return thanhPhoDen;
+	}
+
+	public void setThanhPhoDen(String thanhPhoDen) {
+		this.thanhPhoDen = thanhPhoDen;
 	}
 
 }

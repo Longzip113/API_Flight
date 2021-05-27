@@ -35,9 +35,9 @@ public class KhachHangAPI {
 		return service.update(model);
 	}
 	
-	@DeleteMapping(value = "/khachhang")
-	public Boolean delete(@RequestBody Long[] ids) {
-		return service.delete(ids);
+	@DeleteMapping(value = "/khachhang/{id}")
+	public Boolean delete(@PathVariable("id") Long id) {
+		return service.delete(id);
 	}
 	
 	@GetMapping(value = "/khachhang/{id}")

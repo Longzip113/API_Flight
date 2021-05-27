@@ -18,8 +18,10 @@ public class ChuyenBayConverter {
 		entity.setThoiGianBay(dto.getThoiGianBay());
 		entity.setMayBayEntity(mayBayEntity);
 		entity.setTuyenBayEntity(tuyenBayEntity);
-		
+		entity.setGhePhoThong(dto.getGhePhoThong());
+		entity.setGheThuongGia(dto.getGheThuongGia());
 		entity.setTinhTrang(dto.getTinhTrang());
+		entity.setGio(dto.getGio());
 		return entity;
 	}
 	
@@ -31,8 +33,10 @@ public class ChuyenBayConverter {
 		dto.setThoiGianBay(entity.getThoiGianBay());
 		dto.setMayBayId(entity.getMayBayEntity().getId());
 		dto.setTuyenBayId(entity.getTuyenBayEntity().getId());
-
+		dto.setGhePhoThong(entity.getGhePhoThong());
+		dto.setGheThuongGia(entity.getGheThuongGia());
 		dto.setTinhTrang(entity.getTinhTrang());
+		dto.setGio(entity.getGio());
 		return dto;
 	}
 }

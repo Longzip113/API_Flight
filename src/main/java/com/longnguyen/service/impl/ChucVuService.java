@@ -48,10 +48,8 @@ public class ChucVuService implements IBasic<ChucVuDTO> {
 	}
 
 	@Override
-	public Boolean delete(Long[] ids) {
-		for (Long id : ids) {
-			chucVuRepository.delete(id);
-		}
+	public Boolean delete(Long id) {
+		chucVuRepository.delete(id);
 		return true;
 	}
 

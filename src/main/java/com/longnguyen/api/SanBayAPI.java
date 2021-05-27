@@ -40,9 +40,9 @@ public class SanBayAPI {
 		return sanBayDTO;
 	}
 	
-	@DeleteMapping(value = "/sanbay")
-	public Boolean deleteSanBay(@RequestBody Long[] ids) {
-		return sanBayService.delete(ids);
+	@DeleteMapping(value = "/sanbay/{id}")
+	public Boolean deleteSanBay(@PathVariable("id") Long id) {
+		return sanBayService.delete(id);
 	}
 	
 	@GetMapping(value = "/sanbay/{id}")

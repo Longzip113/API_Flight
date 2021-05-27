@@ -3,7 +3,6 @@ package com.longnguyen.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,10 +37,6 @@ public class MayBayAPI {
 		return sanBayDTO;
 	}
 	
-	@DeleteMapping(value = "/maybay")
-	public Boolean delete(@RequestBody Long[] ids) {
-		return mayBayService.delete(ids);
-	}
 	
 	@GetMapping(value = "/maybay/{id}")
 	public MayBayDTO getOne(@PathVariable("id")Long id) {

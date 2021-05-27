@@ -23,11 +23,14 @@ public class PhieuDatVeEntity {
 	@Column(name = "ghichu")
 	private String ghiChu;
 	
-	@Column(name = "maghe")
-	private String maGhe;
+	@Column(name = "mave")
+	private String maVe;
 	
-	@Column(name = "codePhieuDatVe")
-	private String codePhieuDatVe;
+	@Column(name = "roledatve")
+	private Integer roleDatVe;
+	
+	@Column(name = "nguoidatve_id")
+	private Integer nguoiDatVe_id;
 
 	@Column(name = "ngaydat")
 	private Date ngayDat;
@@ -50,6 +53,14 @@ public class PhieuDatVeEntity {
 	@JoinColumn(name = "nhanvien_id")
 	private NhanVienEntity nhanVienEntity;
 
+	public Integer getNguoiDatVe_id() {
+		return nguoiDatVe_id;
+	}
+
+	public void setNguoiDatVe_id(Integer nguoiDatVe_id) {
+		this.nguoiDatVe_id = nguoiDatVe_id;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -66,20 +77,22 @@ public class PhieuDatVeEntity {
 		this.ghiChu = ghiChu;
 	}
 
-	public String getMaGhe() {
-		return maGhe;
+	public String getMaVe() {
+		return maVe;
 	}
 
-	public void setMaGhe(String maGhe) {
-		this.maGhe = maGhe;
+	public void setMaVe(String maGhe) {
+		this.maVe = maGhe;
 	}
 
-	public String getCodePhieuDatVe() {
-		return codePhieuDatVe;
+	
+
+	public Integer getRoleDatVe() {
+		return roleDatVe;
 	}
 
-	public void setCodePhieuDatVe(String codePhieuDatVe) {
-		this.codePhieuDatVe = codePhieuDatVe;
+	public void setRoleDatVe(Integer roleDatVe) {
+		this.roleDatVe = roleDatVe;
 	}
 
 	public Date getNgayDat() {

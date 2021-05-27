@@ -44,10 +44,8 @@ public class MayBayService implements IBasic<MayBayDTO>{
 	}
 
 	@Override
-	public Boolean delete(Long[] ids) {
-		for (Long id : ids) {
-			mayBayRepository.delete(id);
-		}
+	public Boolean delete(Long id) {
+		mayBayRepository.delete(id);
 		return true;
 	}
 

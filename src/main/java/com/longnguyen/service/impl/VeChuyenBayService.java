@@ -61,10 +61,9 @@ public class VeChuyenBayService implements IBasic<VeChuyenBayDTO>{
 	}
 
 	@Override
-	public Boolean delete(Long[] ids) {
-		for (Long id : ids) {
+	public Boolean delete(Long id) {
 			veChuyenBayRepository.delete(id);
-		}
+		
 		return true;
 	}
 

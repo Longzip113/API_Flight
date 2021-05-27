@@ -44,10 +44,8 @@ public class KhachHangSerice implements IKhachHangService{
 	}
 
 	@Override
-	public Boolean delete(Long[] ids) {
-		for (Long id : ids) {
-			khachHangRepository.delete(id);
-		}
+	public Boolean delete(Long id) {
+		khachHangRepository.delete(id);
 		return true;
 	}
 

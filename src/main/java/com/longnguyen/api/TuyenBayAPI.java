@@ -36,9 +36,9 @@ public class TuyenBayAPI {
 		return service.update(model);
 	}
 	
-	@DeleteMapping(value = "/tuyenbay")
-	public Boolean delete(@RequestBody Long[] ids) {
-		return service.delete(ids);
+	@DeleteMapping(value = "/tuyenbay/{id}")
+	public Boolean delete(@PathVariable("id") Long id) {
+		return service.delete(id);
 	}
 	
 	@GetMapping(value = "/tuyenbay/{id}")
