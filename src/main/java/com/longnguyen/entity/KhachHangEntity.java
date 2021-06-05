@@ -25,6 +25,9 @@ public class KhachHangEntity {
 	@Column(name = "cmnd")
 	private String CMND;
 	
+	@Column(name = "email")
+	private String email;
+	
 	@Column(name = "sodienthoai")
 	private String soDienThoai;
 	
@@ -40,6 +43,15 @@ public class KhachHangEntity {
 	@OneToMany(mappedBy = "khachHangEntity")
 	private List<PhieuDatVeEntity> phieuDatVeEntities = new ArrayList<>();
 	
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public List<PhieuDatVeEntity> getPhieuDatVeEntities() {
 		return phieuDatVeEntities;

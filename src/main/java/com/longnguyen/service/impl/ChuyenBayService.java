@@ -61,6 +61,7 @@ public class ChuyenBayService implements IChuyenBayService{
 		}
 		List<TuyenBayEntity> tuyenBayEntities = tuyenBayRepository.findAll();
 		List<SanBayDTO> sanBayDTOs = sanBayService.findAll();
+		
 		dtos.forEach(item -> {
 			MayBayEntity mayBayEntity = mayBayRepository.getOne(item.getMayBayId());
 			item.setHangVe(mayBayEntity.getHangMayBay());

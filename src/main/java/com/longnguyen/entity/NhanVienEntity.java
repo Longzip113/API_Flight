@@ -1,8 +1,5 @@
 package com.longnguyen.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -44,17 +40,6 @@ public class NhanVienEntity {
 	@JoinColumn(name = "chucvu_id")
 	private ChucVuEntity chucVuEntity;
 	
-	@OneToMany(mappedBy = "nhanVienEntity")
-	private List<PhieuDatVeEntity> phieuDatVeEntities = new ArrayList<>();
-	
-
-	public List<PhieuDatVeEntity> getPhieuDatVeEntities() {
-		return phieuDatVeEntities;
-	}
-
-	public void setPhieuDatVeEntities(List<PhieuDatVeEntity> phieuDatVeEntities) {
-		this.phieuDatVeEntities = phieuDatVeEntities;
-	}
 
 	public Long getId() {
 		return id;

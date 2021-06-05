@@ -6,7 +6,9 @@ public class KhachHangDTO {
 	
 	private String hoTen;
 	
-	private String CMND;
+	private String cmnd;
+	
+	private String email;
 	
 	private String soDienThoai;
 	
@@ -35,11 +37,11 @@ public class KhachHangDTO {
 	}
 
 	public String getCMND() {
-		return CMND;
+		return cmnd;
 	}
 
 	public void setCMND(String cMND) {
-		CMND = cMND;
+		cmnd = cMND;
 	}
 
 	public String getSoDienThoai() {
@@ -72,5 +74,13 @@ public class KhachHangDTO {
 
 	public void setTinhTrang(Boolean tinhTrang) {
 		this.tinhTrang = tinhTrang;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

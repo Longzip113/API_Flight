@@ -15,6 +15,7 @@ public class KhachHangConverter {
 		
 		entity.setCMND(dto.getCMND());
 		entity.setHoTen(dto.getHoTen());
+		entity.setEmail(dto.getEmail());
 		entity.setMatKhau(dto.getMatKhau());
 		entity.setSoDienThoai(dto.getSoDienThoai());
 		entity.setTaiKhoan(dto.getTaiKhoan());
@@ -30,6 +31,7 @@ public class KhachHangConverter {
 		
 		dto.setCMND(entity.getCMND());
 		dto.setHoTen(entity.getHoTen());
+		dto.setEmail(entity.getEmail());
 		dto.setMatKhau(entity.getMatKhau());
 		dto.setSoDienThoai(entity.getSoDienThoai());
 		dto.setTaiKhoan(entity.getTaiKhoan());

@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name = "hangve")
 public class HangVeEntity {
@@ -21,7 +19,7 @@ public class HangVeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //id tự động tăng
 	private Long id;  
 	
-	@Column
+	@Column(name = "code")
 	private String code;
 	
 	@Column(name = "tenhangve")
@@ -30,7 +28,6 @@ public class HangVeEntity {
 	@Column(name = "tinhtrang")
 	private Boolean tinhTrang;
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "hangVeEntity")
 	private List<VeChuyenBayEntity> veChuyenBayEntities = new ArrayList<>();
 	

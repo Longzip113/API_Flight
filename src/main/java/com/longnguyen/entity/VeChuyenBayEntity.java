@@ -23,7 +23,7 @@ public class VeChuyenBayEntity {
 	private Long id;
 	
 	@Column(name = "dongia")
-	private Float donGia;
+	private Double donGia;
 	
 	@Column(name = "tinhtrang")
 	private Boolean tinhTrang;
@@ -56,11 +56,11 @@ public class VeChuyenBayEntity {
 		this.id = id;
 	}
 
-	public Float getDonGia() {
+	public Double getDonGia() {
 		return donGia;
 	}
 
-	public void setDonGia(Float donGia) {
+	public void setDonGia(Double donGia) {
 		this.donGia = donGia;
 	}
 

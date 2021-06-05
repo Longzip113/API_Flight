@@ -1,7 +1,5 @@
 package com.longnguyen.dto;
 
-import java.util.Date;
-
 public class PhieuDatVeDTO {
 
 	private Long id;
@@ -11,16 +9,20 @@ public class PhieuDatVeDTO {
 	private String ghiChu;
 	private String maVe;
 	private Integer roleDatVe;
-	private Date ngayDat;
+	private String ngayDat;
 	private Double thanhTien;
 	private Boolean tinhTrang;
-	private Integer nguoiDatVe_id;
+	private Long nguoiDatVe_id;
 	
 	
 	private String hoTen;
 	private String cmnd;
 	private String soDienThoai;
 	private String email;
+	
+	private String hoTenNhanVien;
+	private String thoiGianBay;
+	private String tuyenBay;
 	
 
 	public Long getId() {
@@ -47,11 +49,11 @@ public class PhieuDatVeDTO {
 		this.maVe = maGhe;
 	}
 
-	public Date getNgayDat() {
+	public String getNgayDat() {
 		return ngayDat;
 	}
 
-	public void setNgayDat(Date ngayDat) {
+	public void setNgayDat(String ngayDat) {
 		this.ngayDat = ngayDat;
 	}
 
@@ -103,11 +105,11 @@ public class PhieuDatVeDTO {
 		this.roleDatVe = roleDatVe;
 	}
 
-	public Integer getNguoiDatVe_id() {
+	public Long getNguoiDatVe_id() {
 		return nguoiDatVe_id;
 	}
 
-	public void setNguoiDatVe_id(Integer nguoiDatVe_id) {
+	public void setNguoiDatVe_id(Long nguoiDatVe_id) {
 		this.nguoiDatVe_id = nguoiDatVe_id;
 	}
 
@@ -141,6 +143,30 @@ public class PhieuDatVeDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getHoTenNhanVien() {
+		return hoTenNhanVien;
+	}
+
+	public void setHoTenNhanVien(String hoTenNhanVien) {
+		this.hoTenNhanVien = hoTenNhanVien;
+	}
+
+	public String getThoiGianBay() {
+		return thoiGianBay;
+	}
+
+	public void setThoiGianBay(String thoiGianBay) {
+		this.thoiGianBay = thoiGianBay;
+	}
+
+	public String getTuyenBay() {
+		return tuyenBay;
+	}
+
+	public void setTuyenBay(String tuyenBay) {
+		this.tuyenBay = tuyenBay;
 	}
 
 }

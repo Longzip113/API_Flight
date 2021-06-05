@@ -14,10 +14,15 @@ public class VeChuyenBayConverter {
 		VeChuyenBayEntity entity = new VeChuyenBayEntity();
 		entity.setId(dto.getId());
 		
-		entity.setChuyenBayEntity(chuyenBayEntity);
+		if(chuyenBayEntity != null)
+		{
+			entity.setChuyenBayEntity(chuyenBayEntity);
+		}
 		entity.setDonGia(dto.getDonGia());
-		entity.setHangVeEntity(hangVeEntity);
-		
+		if(hangVeEntity != null)
+		{
+			entity.setHangVeEntity(hangVeEntity);
+		}
 		entity.setTinhTrang(dto.getTinhTrang());
 		return entity;
 	}

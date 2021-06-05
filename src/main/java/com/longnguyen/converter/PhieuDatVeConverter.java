@@ -1,5 +1,9 @@
 package com.longnguyen.converter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
 import com.longnguyen.dto.PhieuDatVeDTO;
@@ -14,10 +18,9 @@ public class PhieuDatVeConverter {
 		PhieuDatVeEntity entity = new PhieuDatVeEntity();
 			
 			entity.setId(dto.getId());
-			
 			entity.setGhiChu(dto.getGhiChu());
 			entity.setMaVe(dto.getMaVe());
-			entity.setNgayDat(dto.getNgayDat());
+			
 			entity.setThanhTien(dto.getThanhTien());
 			entity.setRoleDatVe(dto.getRoleDatVe());
 			entity.setNguoiDatVe_id(dto.getNguoiDatVe_id());
@@ -35,7 +38,11 @@ public class PhieuDatVeConverter {
 			dto.setNguoiDatVe_id(entity.getNguoiDatVe_id());
 			dto.setGhiChu(entity.getGhiChu());
 			dto.setMaVe(entity.getMaVe());
-			dto.setNgayDat(entity.getNgayDat());
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = entity.getNgayDat();
+			
+			dto.setNgayDat(dateFormat.format(date).toString());
 			dto.setThanhTien(entity.getThanhTien());
 			dto.setRoleDatVe(entity.getRoleDatVe());
 			dto.setKhachHangID(entity.getKhachHangEntity().getId());

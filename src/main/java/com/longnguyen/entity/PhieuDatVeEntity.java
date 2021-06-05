@@ -30,7 +30,7 @@ public class PhieuDatVeEntity {
 	private Integer roleDatVe;
 	
 	@Column(name = "nguoidatve_id")
-	private Integer nguoiDatVe_id;
+	private Long nguoiDatVe_id;
 
 	@Column(name = "ngaydat")
 	private Date ngayDat;
@@ -49,15 +49,11 @@ public class PhieuDatVeEntity {
 	@JoinColumn(name = "khachhang_id")
 	private KhachHangEntity khachHangEntity;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "nhanvien_id")
-	private NhanVienEntity nhanVienEntity;
-
-	public Integer getNguoiDatVe_id() {
+	public Long getNguoiDatVe_id() {
 		return nguoiDatVe_id;
 	}
 
-	public void setNguoiDatVe_id(Integer nguoiDatVe_id) {
+	public void setNguoiDatVe_id(Long nguoiDatVe_id) {
 		this.nguoiDatVe_id = nguoiDatVe_id;
 	}
 	
@@ -135,11 +131,4 @@ public class PhieuDatVeEntity {
 		this.khachHangEntity = khachHangEntity;
 	}
 
-	public NhanVienEntity getNhanVienEntity() {
-		return nhanVienEntity;
-	}
-
-	public void setNhanVienEntity(NhanVienEntity nhanVienEntity) {
-		this.nhanVienEntity = nhanVienEntity;
-	}
 }

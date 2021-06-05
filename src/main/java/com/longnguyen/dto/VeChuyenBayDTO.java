@@ -5,7 +5,7 @@ public class VeChuyenBayDTO {
 	private Long id;
 	private Long hangVeID;
 	private Long chuyenBayID;
-	private Float donGia;
+	private Double donGia;
 	private Boolean tinhTrang;
 	
 	private String codeHangVe;
@@ -18,11 +18,11 @@ public class VeChuyenBayDTO {
 		this.id = id;
 	}
 
-	public Float getDonGia() {
+	public Double getDonGia() {
 		return donGia;
 	}
 
-	public void setDonGia(Float donGia) {
+	public void setDonGia(Double donGia) {
 		this.donGia = donGia;
 	}
 

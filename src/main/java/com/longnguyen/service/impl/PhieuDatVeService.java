@@ -1,5 +1,7 @@
 package com.longnguyen.service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,9 +9,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.longnguyen.converter.KhachHangConverter;
 import com.longnguyen.converter.PhieuDatVeConverter;
+import com.longnguyen.converter.VeChuyenBayConverter;
+import com.longnguyen.dto.ChuyenBayDTO;
+import com.longnguyen.dto.KhachHangDTO;
+import com.longnguyen.dto.NhanVienDTO;
 import com.longnguyen.dto.PhieuDatVeDTO;
-import com.longnguyen.entity.ChuyenBayEntity;
+import com.longnguyen.dto.SanBayDTO;
+import com.longnguyen.dto.TuyenBayDTO;
+import com.longnguyen.dto.VeChuyenBayDTO;
 import com.longnguyen.entity.KhachHangEntity;
 import com.longnguyen.entity.PhieuDatVeEntity;
 import com.longnguyen.entity.VeChuyenBayEntity;
@@ -18,6 +27,8 @@ import com.longnguyen.repository.KhachHangRepository;
 import com.longnguyen.repository.MayBayRepository;
 import com.longnguyen.repository.NhanVienRepository;
 import com.longnguyen.repository.PhieuDatVeRepository;
+import com.longnguyen.repository.SanBayRepository;
+import com.longnguyen.repository.TuyenBayRepository;
 import com.longnguyen.repository.VeChuyenBayRepository;
 import com.longnguyen.service.IBasic;
 
@@ -28,7 +39,13 @@ public class PhieuDatVeService implements IBasic<PhieuDatVeDTO>{
 	VeChuyenBayRepository veChuyenBayRepository;
 	
 	@Autowired
+	VeChuyenBayService veChuyenBayService;
+	
+	@Autowired
 	ChuyenBayRepository chuyenBayRepository;
+	
+	@Autowired
+	ChuyenBayService chuyenBayService;
 	
 	@Autowired
 	MayBayRepository mayBayRepository;
@@ -40,18 +57,68 @@ public class PhieuDatVeService implements IBasic<PhieuDatVeDTO>{
 	KhachHangRepository khachHangRepository;
 	
 	@Autowired
+	KhachHangSerice khachHangSerice;
+	
+	@Autowired
 	NhanVienRepository nhanVienRepository;
+	
+	@Autowired
+	NhanVienService nhanVienService;
+	
+	@Autowired
+	TuyenBayRepository tuyenBayRepository;
+	
+	@Autowired
+	TuyenBayService tuyenBayService;
+	
+	@Autowired
+	SanBayRepository sanBayRepository;
+	
+	@Autowired
+	SanBayService sanBayService;
 	
 	@Autowired
 	PhieuDatVeConverter phieuDatVeConverter;
 	
+	@Autowired
+	KhachHangConverter khachHangConverter;
+	
+	@Autowired
+	VeChuyenBayConverter veChuyenBayConverter;
+	
 	@Override
 	public List<PhieuDatVeDTO> findAll() {
-		List<PhieuDatVeEntity> chucVuEntities = phieuDatVeRepository.findAll();
-		List<PhieuDatVeDTO> dtos = new ArrayList<PhieuDatVeDTO>();
+		List<PhieuDatVeEntity> phieuDatVeEntities = phieuDatVeRepository.findAll();
 		
-		for (PhieuDatVeEntity item : chucVuEntities) {
+		List<PhieuDatVeDTO> dtos = new ArrayList<PhieuDatVeDTO>();
+		for (PhieuDatVeEntity item : phieuDatVeEntities) {
 			PhieuDatVeDTO dto = phieuDatVeConverter.toDTO(item);
+			KhachHangDTO khachHangDTO = khachHangSerice.findOne(dto.getKhachHangID());
+			if(dto.getRoleDatVe() == 1) {
+				NhanVienDTO nhanVienDTO = nhanVienService.findOne(dto.getNguoiDatVe_id());
+				dto.setHoTenNhanVien(nhanVienDTO.getHoTen());
+			}
+			else {
+				dto.setHoTenNhanVien("Khách hàng đặt !!");
+			}
+			VeChuyenBayDTO veChuyenBayDTO = veChuyenBayService.findOne(dto.getVechuyenbayID());
+			ChuyenBayDTO chuyenBayDTO = chuyenBayService.findOne(veChuyenBayDTO.getChuyenBayID());
+			TuyenBayDTO tuyenBayDTO = tuyenBayService.findOne(chuyenBayDTO.getTuyenBayId());
+			SanBayDTO sanBayDi = sanBayService.findOne(tuyenBayDTO.getSanBayDiID());
+			SanBayDTO sanBayDen = sanBayService.findOne(tuyenBayDTO.getSanBayDenID());
+			
+			dto.setTuyenBay(sanBayDi.getTenSanBay() + " -- " + sanBayDen.getTenSanBay());
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = chuyenBayDTO.getNgayGio();
+			
+			dto.setThoiGianBay(dateFormat.format(date).toString());
+			
+			dto.setCMND(khachHangDTO.getCMND());
+			dto.setEmail(khachHangDTO.getEmail());
+			dto.setHoTen(khachHangDTO.getHoTen());
+			dto.setSoDienThoai(khachHangDTO.getSoDienThoai());
+			
 			dtos.add(dto);
 		}
 		
@@ -62,31 +129,36 @@ public class PhieuDatVeService implements IBasic<PhieuDatVeDTO>{
 	public PhieuDatVeDTO save(PhieuDatVeDTO model) {
 		
 		// Check khách hàng cũ hay mới
-		KhachHangEntity checkKH = khachHangRepository.findByCmnd(model.getCMND());
+		KhachHangDTO checkKH = khachHangSerice.findByCmnd(model.getCMND());
 		if(checkKH == null) {
-			checkKH = new KhachHangEntity();
+			checkKH = new KhachHangDTO();
 			checkKH.setCMND(model.getCMND());
 			checkKH.setHoTen(model.getHoTen());
+			checkKH.setEmail(model.getEmail());
 			checkKH.setSoDienThoai(model.getSoDienThoai());
 			checkKH.setTinhTrang(true);
-			KhachHangEntity entityKH = khachHangRepository.save(checkKH);
-			model.setKhachHangID(entityKH.getId());
+			KhachHangDTO dtoKH = khachHangSerice.save(checkKH);
+			model.setKhachHangID(dtoKH.getId());
 		} else {
 			model.setKhachHangID(checkKH.getId());
 		}
-		KhachHangEntity khachHangEntity = khachHangRepository.getOne(model.getKhachHangID());
-		VeChuyenBayEntity veChuyenBayEntity = veChuyenBayRepository.getOne(model.getVechuyenbayID());
+		VeChuyenBayDTO veChuyenBayDTO = veChuyenBayService.findOne(model.getVechuyenbayID());
 		
 		// Update số ghế 
-		ChuyenBayEntity chuyenBayEntity = chuyenBayRepository.getOne(veChuyenBayEntity.getChuyenBayEntity().getId());
-		if (veChuyenBayEntity.getHangVeEntity().getCode().equals("PT")) {
-			chuyenBayEntity.setGhePhoThong(chuyenBayEntity.getGhePhoThong() - 1);
+		ChuyenBayDTO chuyenBayDTO = chuyenBayService.findOne(veChuyenBayDTO.getChuyenBayID());
+		if (veChuyenBayDTO.getCodeHangVe().equals("PT")) {
+			chuyenBayDTO.setGhePhoThong(chuyenBayDTO.getGhePhoThong() - 1);
 		} else {
-			chuyenBayEntity.setGheThuongGia(chuyenBayEntity.getGheThuongGia() - 1);
+			chuyenBayDTO.setGheThuongGia(chuyenBayDTO.getGheThuongGia() - 1);
 		}
-		chuyenBayRepository.save(chuyenBayEntity);
+		chuyenBayService.save(chuyenBayDTO);
 		
-		// luu phieu dat ve
+//		// luu phieu dat ve
+//		KhachHangEntity khachHangEntity = khachHangConverter.toEntity(khachHangDTO);
+//		VeChuyenBayEntity veChuyenBayEntity = veChuyenBayConverter.toEntity(veChuyenBayDTO, null, null);
+		
+		KhachHangEntity khachHangEntity = khachHangRepository.getOne(model.getKhachHangID());
+		VeChuyenBayEntity veChuyenBayEntity = veChuyenBayRepository.getOne(model.getVechuyenbayID());
 		PhieuDatVeEntity entity = phieuDatVeConverter.toEntity(model, khachHangEntity, veChuyenBayEntity);
 		entity.setTinhTrang(true);
 		entity.setNgayDat(new Date(System.currentTimeMillis()));
@@ -111,7 +183,7 @@ public class PhieuDatVeService implements IBasic<PhieuDatVeDTO>{
 
 	@Override
 	public PhieuDatVeDTO findOne(Long id) {
-		return phieuDatVeConverter.toDTO(phieuDatVeRepository.getOne(id));
+		return phieuDatVeConverter.toDTO(phieuDatVeRepository.findOne(id));
 	}
 	
 }

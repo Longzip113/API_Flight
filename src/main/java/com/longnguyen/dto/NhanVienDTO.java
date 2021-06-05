@@ -7,6 +7,7 @@ public class NhanVienDTO {
 	private String hoTen;
 	private String CMND;
 	private String soDienThoai;
+	
 	private String taiKhoan;
 	private String matKhau;
 	private Boolean tinhTrang;

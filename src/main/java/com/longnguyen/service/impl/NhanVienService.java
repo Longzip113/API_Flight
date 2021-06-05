@@ -39,14 +39,14 @@ public class NhanVienService implements IBasic<NhanVienDTO>{
 	@Override
 	public NhanVienDTO save(NhanVienDTO model) {
 		ChucVuEntity chucVuEntity = chucVuRepository.getOne(model.getChucVuID());
-		NhanVienEntity entity = nhanVienCoverter.toEntity(model, chucVuEntity, null);
+		NhanVienEntity entity = nhanVienCoverter.toEntity(model, chucVuEntity);
 		return nhanVienCoverter.toDTO(nhanVienRepository.save(entity), model.getChucVuID());
 	}
 
 	@Override
 	public NhanVienDTO update(NhanVienDTO model) {
 		ChucVuEntity chucVuEntity = chucVuRepository.getOne(model.getChucVuID());
-		NhanVienEntity entity = nhanVienCoverter.toEntity(model, chucVuEntity, null);
+		NhanVienEntity entity = nhanVienCoverter.toEntity(model, chucVuEntity);
 		return nhanVienCoverter.toDTO(nhanVienRepository.save(entity), model.getChucVuID());
 	}
 

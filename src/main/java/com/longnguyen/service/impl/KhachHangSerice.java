@@ -33,6 +33,26 @@ public class KhachHangSerice implements IKhachHangService{
 
 	@Override
 	public KhachHangDTO save(KhachHangDTO model) {
+		List<KhachHangDTO> khachHangDTOs = findAll();
+		for (KhachHangDTO item : khachHangDTOs) {
+			if(item.getCMND().equals(model.getCMND()))
+			{
+				model.setCMND("Duplicate");
+				return model;
+			}
+			
+			if(item.getEmail().equals(model.getEmail()))
+			{
+				model.setEmail("Duplicate");
+				return model;
+			}
+			
+			if(item.getSoDienThoai().equals(model.getSoDienThoai()))
+			{
+				model.setSoDienThoai("Duplicate");
+				return model;
+			}
+		}
 		KhachHangEntity entity = khachHangConverter.toEntity(model);
 		return khachHangConverter.toDTO(khachHangRepository.save(entity));
 	}
@@ -51,7 +71,7 @@ public class KhachHangSerice implements IKhachHangService{
 
 	@Override
 	public KhachHangDTO login(KhachHangDTO khachHangDTO) {
-		KhachHangEntity entity = khachHangRepository.findByUserNameAndPassWord(khachHangDTO.getMatKhau(), khachHangDTO.getTaiKhoan());
+		KhachHangEntity entity = khachHangRepository.findByUserNameAndEmail(khachHangDTO.getMatKhau(), khachHangDTO.getEmail());
 		if (entity != null) {
 			return khachHangConverter.toDTO(entity);
 		}
@@ -60,9 +80,14 @@ public class KhachHangSerice implements IKhachHangService{
 
 	@Override
 	public KhachHangDTO findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return khachHangConverter.toDTO(khachHangRepository.findOne(id));
 	}
+
+	@Override
+	public KhachHangDTO findByCmnd(String cmnd) {
+		return khachHangConverter.toDTO(khachHangRepository.findByCmnd(cmnd));
+	}
+	
 	
 	
 	
